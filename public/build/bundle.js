@@ -361,12 +361,12 @@ var app = (function () {
     			h1 = element("h1");
     			t2 = text(t2_value);
     			attr_dev(input0, "type", "button");
-    			input0.value = "Increment";
+    			input0.value = /*ChangeSystem*/ ctx[2];
+    			attr_dev(input0, "class", "bottomleft");
     			add_location(input0, file, 26, 0, 641);
     			attr_dev(input1, "type", "button");
-    			input1.value = /*ChangeSystem*/ ctx[2];
-    			attr_dev(input1, "class", "bottomleft");
-    			add_location(input1, file, 27, 0, 700);
+    			input1.value = "Increment";
+    			add_location(input1, file, 27, 0, 743);
     			add_location(h1, file, 28, 0, 802);
     		},
     		l: function claim(nodes) {
@@ -382,9 +382,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "click", /*Click*/ ctx[3], false, false, false),
     					listen_dev(
-    						input1,
+    						input0,
     						"click",
     						function () {
     							if (is_function(/*ChangeFrom*/ ctx[5](/*Representation*/ ctx[0]))) /*ChangeFrom*/ ctx[5](/*Representation*/ ctx[0]).apply(this, arguments);
@@ -392,7 +391,8 @@ var app = (function () {
     						false,
     						false,
     						false
-    					)
+    					),
+    					listen_dev(input1, "click", /*Click*/ ctx[3], false, false, false)
     				];
 
     				mounted = true;
@@ -402,7 +402,7 @@ var app = (function () {
     			ctx = new_ctx;
 
     			if (dirty & /*ChangeSystem*/ 4) {
-    				prop_dev(input1, "value", /*ChangeSystem*/ ctx[2]);
+    				prop_dev(input0, "value", /*ChangeSystem*/ ctx[2]);
     			}
 
     			if (dirty & /*Counter*/ 2 && t2_value !== (t2_value = /*CounterRepresentation*/ ctx[4](/*Counter*/ ctx[1]) + "")) set_data_dev(t2, t2_value);
