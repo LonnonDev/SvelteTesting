@@ -4,6 +4,7 @@ export let ChangeSystem: string = "Change to Decimal";
 
 function Click() {
 	Counter += 0b1;
+	Display()
 }
 
 let CounterRepresentation = (Counter: number): string => {
@@ -14,6 +15,10 @@ let CounterRepresentation = (Counter: number): string => {
 	}
 }
 
+function Display() {
+	document.getElementById("CounterDisplay").innerHTML = CounterRepresentation(Counter)
+}
+
 let ChangeFrom = (Rep: boolean): void => {
 	if (Representation == true) {
 		Representation = !Rep;
@@ -22,4 +27,5 @@ let ChangeFrom = (Rep: boolean): void => {
 		Representation = !Rep;
 		ChangeSystem = "Change to Decimal";
 	}
+	Display();
 }

@@ -303,13 +303,6 @@ var app = (function () {
         node[property] = value;
         dispatch_dev('SvelteDOMSetProperty', { node, property, value });
     }
-    function set_data_dev(text, data) {
-        data = '' + data;
-        if (text.wholeText === data)
-            return;
-        dispatch_dev('SvelteDOMSetData', { node: text, data });
-        text.data = data;
-    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -342,43 +335,68 @@ var app = (function () {
     const file = "src\\Pages\\App.svelte";
 
     function create_fragment(ctx) {
-    	let input0;
+    	let link;
     	let t0;
-    	let input1;
+    	let input0;
     	let t1;
-    	let h1;
-    	let t2_value = /*CounterRepresentation*/ ctx[4](/*Counter*/ ctx[1]) + "";
+    	let input1;
     	let t2;
+    	let h1;
+    	let t4;
+    	let div1;
+    	let div0;
+    	let p;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
-    			input0 = element("input");
+    			link = element("link");
     			t0 = space();
-    			input1 = element("input");
+    			input0 = element("input");
     			t1 = space();
+    			input1 = element("input");
+    			t2 = space();
     			h1 = element("h1");
-    			t2 = text(t2_value);
+    			h1.textContent = "0";
+    			t4 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			p = element("p");
+    			p.textContent = "CPU";
+    			attr_dev(link, "rel", "stylesheet");
+    			attr_dev(link, "href", "stylesheets/app.css");
+    			add_location(link, file, 30, 0, 787);
     			attr_dev(input0, "type", "button");
-    			input0.value = /*ChangeSystem*/ ctx[2];
+    			input0.value = /*ChangeSystem*/ ctx[1];
     			attr_dev(input0, "class", "bottomleft");
-    			add_location(input0, file, 26, 0, 641);
+    			add_location(input0, file, 32, 0, 841);
     			attr_dev(input1, "type", "button");
     			input1.value = "Increment";
-    			add_location(input1, file, 27, 0, 743);
-    			add_location(h1, file, 28, 0, 802);
+    			add_location(input1, file, 33, 0, 943);
+    			attr_dev(h1, "class", "whitetext");
+    			attr_dev(h1, "id", "CounterDisplay");
+    			add_location(h1, file, 34, 0, 1002);
+    			add_location(p, file, 37, 2, 1078);
+    			add_location(div0, file, 36, 1, 1069);
+    			attr_dev(div1, "id", "cpu");
+    			add_location(div1, file, 35, 0, 1052);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, input0, anchor);
+    			insert_dev(target, link, anchor);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, input1, anchor);
+    			insert_dev(target, input0, anchor);
     			insert_dev(target, t1, anchor);
+    			insert_dev(target, input1, anchor);
+    			insert_dev(target, t2, anchor);
     			insert_dev(target, h1, anchor);
-    			append_dev(h1, t2);
+    			insert_dev(target, t4, anchor);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, p);
 
     			if (!mounted) {
     				dispose = [
@@ -386,13 +404,13 @@ var app = (function () {
     						input0,
     						"click",
     						function () {
-    							if (is_function(/*ChangeFrom*/ ctx[5](/*Representation*/ ctx[0]))) /*ChangeFrom*/ ctx[5](/*Representation*/ ctx[0]).apply(this, arguments);
+    							if (is_function(/*ChangeFrom*/ ctx[3](/*Representation*/ ctx[0]))) /*ChangeFrom*/ ctx[3](/*Representation*/ ctx[0]).apply(this, arguments);
     						},
     						false,
     						false,
     						false
     					),
-    					listen_dev(input1, "click", /*Click*/ ctx[3], false, false, false)
+    					listen_dev(input1, "click", /*Click*/ ctx[2], false, false, false)
     				];
 
     				mounted = true;
@@ -401,20 +419,22 @@ var app = (function () {
     		p: function update(new_ctx, [dirty]) {
     			ctx = new_ctx;
 
-    			if (dirty & /*ChangeSystem*/ 4) {
-    				prop_dev(input0, "value", /*ChangeSystem*/ ctx[2]);
+    			if (dirty & /*ChangeSystem*/ 2) {
+    				prop_dev(input0, "value", /*ChangeSystem*/ ctx[1]);
     			}
-
-    			if (dirty & /*Counter*/ 2 && t2_value !== (t2_value = /*CounterRepresentation*/ ctx[4](/*Counter*/ ctx[1]) + "")) set_data_dev(t2, t2_value);
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(input0);
+    			if (detaching) detach_dev(link);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(input1);
+    			if (detaching) detach_dev(input0);
     			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(input1);
+    			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(h1);
+    			if (detaching) detach_dev(t4);
+    			if (detaching) detach_dev(div1);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -439,7 +459,8 @@ var app = (function () {
     	let { ChangeSystem = "Change to Decimal" } = $$props;
 
     	function Click() {
-    		$$invalidate(1, Counter += 1);
+    		$$invalidate(4, Counter += 1);
+    		Display();
     	}
 
     	let CounterRepresentation = Counter => {
@@ -450,14 +471,20 @@ var app = (function () {
     		}
     	};
 
+    	function Display() {
+    		document.getElementById("CounterDisplay").innerHTML = CounterRepresentation(Counter);
+    	}
+
     	let ChangeFrom = Rep => {
     		if (Representation == true) {
     			$$invalidate(0, Representation = !Rep);
-    			$$invalidate(2, ChangeSystem = "Change to Binary");
+    			$$invalidate(1, ChangeSystem = "Change to Binary");
     		} else {
     			$$invalidate(0, Representation = !Rep);
-    			$$invalidate(2, ChangeSystem = "Change to Decimal");
+    			$$invalidate(1, ChangeSystem = "Change to Decimal");
     		}
+
+    		Display();
     	};
 
     	const writable_props = ["Representation", "Counter", "ChangeSystem"];
@@ -468,8 +495,8 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ("Representation" in $$props) $$invalidate(0, Representation = $$props.Representation);
-    		if ("Counter" in $$props) $$invalidate(1, Counter = $$props.Counter);
-    		if ("ChangeSystem" in $$props) $$invalidate(2, ChangeSystem = $$props.ChangeSystem);
+    		if ("Counter" in $$props) $$invalidate(4, Counter = $$props.Counter);
+    		if ("ChangeSystem" in $$props) $$invalidate(1, ChangeSystem = $$props.ChangeSystem);
     	};
 
     	$$self.$capture_state = () => ({
@@ -478,29 +505,23 @@ var app = (function () {
     		ChangeSystem,
     		Click,
     		CounterRepresentation,
+    		Display,
     		ChangeFrom
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("Representation" in $$props) $$invalidate(0, Representation = $$props.Representation);
-    		if ("Counter" in $$props) $$invalidate(1, Counter = $$props.Counter);
-    		if ("ChangeSystem" in $$props) $$invalidate(2, ChangeSystem = $$props.ChangeSystem);
-    		if ("CounterRepresentation" in $$props) $$invalidate(4, CounterRepresentation = $$props.CounterRepresentation);
-    		if ("ChangeFrom" in $$props) $$invalidate(5, ChangeFrom = $$props.ChangeFrom);
+    		if ("Counter" in $$props) $$invalidate(4, Counter = $$props.Counter);
+    		if ("ChangeSystem" in $$props) $$invalidate(1, ChangeSystem = $$props.ChangeSystem);
+    		if ("CounterRepresentation" in $$props) CounterRepresentation = $$props.CounterRepresentation;
+    		if ("ChangeFrom" in $$props) $$invalidate(3, ChangeFrom = $$props.ChangeFrom);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [
-    		Representation,
-    		Counter,
-    		ChangeSystem,
-    		Click,
-    		CounterRepresentation,
-    		ChangeFrom
-    	];
+    	return [Representation, ChangeSystem, Click, ChangeFrom, Counter];
     }
 
     class App extends SvelteComponentDev {
@@ -509,8 +530,8 @@ var app = (function () {
 
     		init(this, options, instance, create_fragment, safe_not_equal, {
     			Representation: 0,
-    			Counter: 1,
-    			ChangeSystem: 2
+    			Counter: 4,
+    			ChangeSystem: 1
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {

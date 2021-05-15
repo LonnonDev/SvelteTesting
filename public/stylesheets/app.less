@@ -1,12 +1,43 @@
 @backgroundcolor: rgb(49, 49, 49);
 @buttoncolor: rgb(167, 167, 167);
 
+@font-face {
+    font-family: "LucidaConsole";
+    src: url("LucidaConsole.ttf");
+}
+
 body {
     background-color: @backgroundcolor;
 }
 
 input {
     background-color: @buttoncolor;
+    color: white;
+}
+
+h1.whitetext {
+    color: white;
+}
+
+#cpu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cpu div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(212, 212, 212);
+    border-radius: 25px;
+    width: 500px;
+    height: 500px;
+}
+
+#cpu div p {
+    font-size: 70px;
+    font-family: "LucidaConsole", Arial;
 }
 
 .bottomleft {
